@@ -1,6 +1,6 @@
-package day01_arrays_hashing.walmart;
+package main.java.day01_arrays_hashing.walmart;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * LC 49 - Group Anagrams
@@ -31,6 +31,15 @@ public class GroupAnagrams {
 
     public List<List<String>> groupAnagrams(String[] strs) {
         // TODO: Implement your solution here
-        return List.of();
+        List<List<String>> res = new ArrayList<>();
+        Map<String, List<String>> map = new HashMap<>();
+        for (String s : strs){
+            char[] c = s.toCharArray();
+            Arrays.sort(c);
+            String key = new String(c);
+            map.computeIfAbsent(key, k -> new ArrayList<>()).add(s);
+        }
+
+        return new ArrayList<>(map.values());
     }
 }

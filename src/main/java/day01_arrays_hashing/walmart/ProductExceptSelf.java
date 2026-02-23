@@ -1,4 +1,4 @@
-package day01_arrays_hashing.walmart;
+package main.java.day01_arrays_hashing.walmart;
 
 /**
  * LC 238 - Product of Array Except Self
@@ -28,6 +28,7 @@ public class ProductExceptSelf {
 
     public int[] productExceptSelf(int[] nums) {
         // TODO: Implement your solution here
+
         return new int[0];
     }
 }

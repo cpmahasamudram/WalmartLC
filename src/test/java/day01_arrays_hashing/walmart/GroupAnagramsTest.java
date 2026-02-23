@@ -1,9 +1,10 @@
-package day01_arrays_hashing.walmart;
+package test.java.day01_arrays_hashing.walmart;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import main.java.day01_arrays_hashing.walmart.GroupAnagrams;
 
 import static org.junit.jupiter.api.Assertions.*;
 

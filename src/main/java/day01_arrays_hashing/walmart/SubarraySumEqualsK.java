@@ -1,4 +1,7 @@
-package day01_arrays_hashing.walmart;
+package main.java.day01_arrays_hashing.walmart;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * LC 560 - Subarray Sum Equals K
@@ -27,7 +30,17 @@ package day01_arrays_hashing.walmart;
 public class SubarraySumEqualsK {
 
     public int subarraySum(int[] nums, int k) {
-        // TODO: Implement your solution here
-        return -1;
+        // prefix sum
+        Map<Integer, Integer> map = new HashMap<>();
+        int count = 0;
+        int prefixSum = 0;
+        map.put(prefixSum, 1);
+        for (int num : nums) {
+            prefixSum += num;
+            count += map.getOrDefault(prefixSum - k, 0);
+            map.put(prefixSum, map.getOrDefault(prefixSum, 0) + 1);
+        }
+
+        return count;
     }
 }

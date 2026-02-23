@@ -1,5 +1,6 @@
-package day01_arrays_hashing.walmart;
+package test.java.day01_arrays_hashing.walmart;
 
+import main.java.day01_arrays_hashing.walmart.SubarraySumEqualsK;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
