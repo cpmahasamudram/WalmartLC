@@ -1,4 +1,4 @@
-package day01_arrays_hashing.top150;
+package main.java.day01_arrays_hashing.top150;
 
 public class BestTimeToBuyAndSellStock {
     // TODO: Implement

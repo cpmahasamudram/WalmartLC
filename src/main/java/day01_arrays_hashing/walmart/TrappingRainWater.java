@@ -1,4 +1,4 @@
-package day01_arrays_hashing.walmart;
+package main.java.day01_arrays_hashing.walmart;
 
 /**
  * LC 42 - Trapping Rain Water
@@ -21,11 +21,20 @@ package day01_arrays_hashing.walmart;
  *   Precompute leftMax[] and rightMax[]. Water at i = min(leftMax[i], rightMax[i]) - height[i].
  *
  * Approach 2 - Two Pointers: O(n) time, O(1) space
- *   Left and right pointers. Move the shorter side inward.
- *   Track maxLeft and maxRight as you go.
+ *   l=0, r=n-1, maxL=0, maxR=0.
+ *   If height[l] < height[r]: water at l is bounded by maxL (right side is guaranteed taller).
+ *     If height[l] >= maxL → update maxL. Else → add (maxL - height[l]). l++.
+ *   Else: mirror logic on right side. r--.
+ *   Key insight: the shorter pointer's water is fully determined — the other side has something taller.
  *
- * Approach 3 - Monotonic Stack: O(n) time, O(n) space
- *   Push decreasing heights. On increase, pop and calculate trapped water.
+ * Approach 3 - Monotonic Stack (decreasing): O(n) time, O(n) space
+ *   Maintain a stack of indices with decreasing heights.
+ *   For each i: while stack not empty AND height[i] > height[stack.peek()]:
+ *     pop mid = stack.pop(). If stack empty, break.
+ *     width = i - stack.peek() - 1.
+ *     bounded_height = min(height[i], height[stack.peek()]) - height[mid].
+ *     area += width * bounded_height.
+ *   Push i. Computes water layer-by-layer (horizontal) vs. column-by-column (vertical).
  *
  * TIME: O(n) | SPACE: O(1) for two-pointer approach
  */
@@ -33,6 +42,29 @@ public class TrappingRainWater {
 
     public int trap(int[] height) {
         // TODO: Implement your solution here
-        return -1;
+
+        int l = height.length;
+        int[] p = new int[l];
+        int[] s = new int[l];
+
+        p[0] = height[0];
+        for (int i = 1; i < l; i++) {
+            p[i] = Math.max(p[i-1], height[i]);
+        }
+
+        s[l-1] = height[l-1];
+        for (int i = l-2; i >=0 ; i--) {
+            s[i] = Math.max(s[i+1], height[i]);
+        }
+
+        int[] res = new int[l];
+
+        int area = 0;
+        for (int i = 0; i < l; i++) {
+            res[i] = Math.min(p[i], s[i]) - height[i];
+            area += res[i];
+        }
+
+        return area;
     }
 }

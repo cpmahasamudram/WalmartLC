@@ -28,7 +28,18 @@ public class ProductExceptSelf {
 
     public int[] productExceptSelf(int[] nums) {
         // TODO: Implement your solution here
+        int[] p = new int[nums.length];
+        p[0] = 1; // if initilaised to nums[0] negative and 0 cases will fails
+        for (int i = 1; i < nums.length; i++) {
+            p[i] = nums[i-1] * p[i-1];
+        }
 
-        return new int[0];
+        int r = nums[nums.length-1];
+
+        for (int i = nums.length-2; i >= 0; i--) {
+            p[i] = r * p[i];
+            r = r * nums[i];
+        }
+        return p;
     }
 }
