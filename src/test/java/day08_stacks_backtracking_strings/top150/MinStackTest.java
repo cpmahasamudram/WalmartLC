@@ -1,8 +1,61 @@
-package day08_stacks_backtracking_strings.top150;
+package test.java.day08_stacks_backtracking_strings.top150;
 
+import main.java.day08_stacks_backtracking_strings.top150.MinStack;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MinStackTest {
-    // TODO: Add test cases
+
+    @Test
+    void basicOperations() {
+        MinStack minStack = new MinStack();
+        minStack.push(-2);
+        minStack.push(0);
+        minStack.push(-3);
+        assertEquals(-3, minStack.getMin());
+        minStack.pop();
+        assertEquals(0, minStack.top());
+        assertEquals(-2, minStack.getMin());
+    }
+
+    @Test
+    void singleElement() {
+        MinStack minStack = new MinStack();
+        minStack.push(42);
+        assertEquals(42, minStack.top());
+        assertEquals(42, minStack.getMin());
+    }
+
+    @Test
+    void minAfterMultiplePops() {
+        MinStack minStack = new MinStack();
+        minStack.push(3);
+        minStack.push(1);
+        minStack.push(2);
+        assertEquals(1, minStack.getMin());
+        minStack.pop();
+        assertEquals(1, minStack.getMin());
+        minStack.pop();
+        assertEquals(3, minStack.getMin());
+    }
+
+    @Test
+    void duplicateMinValues() {
+        MinStack minStack = new MinStack();
+        minStack.push(1);
+        minStack.push(1);
+        minStack.pop();
+        assertEquals(1, minStack.getMin());
+    }
+
+    @Test
+    void pushDecreasingValues() {
+        MinStack minStack = new MinStack();
+        minStack.push(3);
+        minStack.push(2);
+        minStack.push(1);
+        assertEquals(1, minStack.getMin());
+        minStack.pop();
+        assertEquals(2, minStack.getMin());
+    }
 }
