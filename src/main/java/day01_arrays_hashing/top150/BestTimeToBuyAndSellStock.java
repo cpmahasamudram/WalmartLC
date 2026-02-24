@@ -26,7 +26,13 @@ package main.java.day01_arrays_hashing.top150;
 public class BestTimeToBuyAndSellStock {
 
     public int maxProfit(int[] prices) {
-        // TODO: Implement your solution here
-        return 0;
+
+        int min = Integer.MAX_VALUE;
+        int profit = 0;
+        for (int i :prices) {
+            profit = Math.max(profit, i - min);
+            min = Math.min(i, min);
+        }
+        return Math.max(profit, 0);
     }
 }

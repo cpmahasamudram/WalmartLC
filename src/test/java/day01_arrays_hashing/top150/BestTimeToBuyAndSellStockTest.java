@@ -25,7 +25,7 @@ class BestTimeToBuyAndSellStockTest {
 
     @Test
     void profitAtEnd() {
-        assertEquals(9, solution.maxProfit(new int[]{1, 2, 4, 2, 5, 7, 2, 4, 9, 0}));
+        assertEquals(8, solution.maxProfit(new int[]{1, 2, 4, 2, 5, 7, 2, 4, 9, 0}));
     }
 
     @Test
