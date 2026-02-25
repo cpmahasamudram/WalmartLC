@@ -45,10 +45,16 @@ public class SearchInRotatedSortedArray {
 //                high = mid - 1;
 //            }
             if(nums[low] <= nums[mid]) { // first half is sorted
-                if(target < nums[mid]) {
+                if(target < nums[mid] && target >= nums[low]) {
                     high = mid - 1;
                 } else {
-
+                    low = mid + 1;
+                }
+            } else if (nums[mid] <= nums[high]) {
+                if(target > nums[mid] && target <= nums[high]) {
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
                 }
             }
         }
