@@ -1,5 +1,8 @@
 package main.java.day07_linked_lists_design.walmart;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * LC 146 - LRU Cache
  * Difficulty: Medium | Source: WALMART (★★★★★ WALMART FAV)
@@ -39,17 +42,63 @@ public class LRUCache {
         Node next;
         Node prev;
     }
+    int capacity;
+    Map<Integer, Node> map = new HashMap<>();
+    Node head;
+    Node tail;
 
     public LRUCache(int capacity) {
-        // TODO: Implement
+        this.capacity = capacity;
+        head = new Node();
+        tail = new Node();
+        head.next = tail;
+        tail.prev = head;
     }
 
     public int get(int key) {
-        // TODO: Implement
+        if(map.containsKey(key)) {
+            Node cur = map.get(key);
+            moveToHead(cur);
+            return cur.value;
+        }
         return -1;
     }
 
+    private void addToHead(Node cur) {
+        cur.next = head.next;
+        cur.prev = head;
+        head.next.prev = cur;
+        head.next = cur;
+    }
+
+    private void removeNode(Node node){
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+
+    private void moveToHead(Node node){
+        removeNode(node);
+        addToHead(node);
+    }
+
+
     public void put(int key, int value) {
-        // TODO: Implement
+        if(map.containsKey(key)) {
+            Node cur = map.get(key);
+            cur.value = value;
+            moveToHead(cur);
+        } else {
+            Node node = new Node();
+            node.key = key;
+            node.value = value;
+            if(map.size() >= capacity) {
+                // remove end
+                Node lru = tail.prev;
+                removeNode(lru);
+                map.remove(lru.key);
+            }
+            map.put(key, node);
+            addToHead(node);
+        }
     }
 }

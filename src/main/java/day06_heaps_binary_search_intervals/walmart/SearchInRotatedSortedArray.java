@@ -30,7 +30,28 @@ package main.java.day06_heaps_binary_search_intervals.walmart;
  */
 public class SearchInRotatedSortedArray {
     public int search(int[] nums, int target) {
-        // TODO: Implement
+        //basic binary search
+        int low = 0, high = nums.length-1;
+
+        while(low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (nums[mid] == target)
+                return mid;
+
+//            if (target > nums[mid]) { Normal binary search
+//                low = mid + 1;
+//            } else {
+//                high = mid - 1;
+//            }
+            if(nums[low] <= nums[mid]) { // first half is sorted
+                if(target < nums[mid]) {
+                    high = mid - 1;
+                } else {
+
+                }
+            }
+        }
         return -1;
     }
 }
