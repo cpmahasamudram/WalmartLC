@@ -1,5 +1,7 @@
 package main.java.day02_two_pointers_sliding_window.walmart;
 
+import static java.util.Collections.swap;
+
 /**
  * LC 75 - Sort Colors
  * Difficulty: Medium | Source: WALMART
@@ -28,6 +30,29 @@ package main.java.day02_two_pointers_sliding_window.walmart;
 public class SortColors {
 
     public void sortColors(int[] nums) {
-        // TODO: Implement your solution here
+    int l = 0, r = nums.length - 1, mid = 0;
+
+    while(mid <= r) {
+        if(nums[mid] == 0) {
+            // swap with left;
+            swap(mid, l, nums);
+            l++;
+            mid++;
+        } else if (nums[mid] == 2) {
+//            swap with r
+            swap(mid, r, nums);
+            r--;
+            // dont ++ mid because if after swap mid value is 1 or 0 or 2 it needs to be handled
+        } else {
+            mid++;
+        }
     }
+    }
+
+    void swap(int i, int j, int[] nums){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
 }
