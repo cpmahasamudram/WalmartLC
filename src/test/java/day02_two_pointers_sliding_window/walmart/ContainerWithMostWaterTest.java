@@ -20,16 +20,16 @@ class ContainerWithMostWaterTest {
 
     @Test
     void decreasingHeights() {
-        assertEquals(6, solution.maxArea(new int[]{4, 3, 2, 1, 4}));
+        assertEquals(16, solution.maxArea(new int[]{4, 3, 2, 1, 4}));
     }
 
     @Test
     void tallEnds() {
-        assertEquals(8, solution.maxArea(new int[]{8, 1, 1, 1, 8}));
+        assertEquals(32, solution.maxArea(new int[]{8, 1, 1, 1, 8}));
     }
 
     @Test
     void uniform() {
-        assertEquals(4, solution.maxArea(new int[]{2, 2, 2, 2, 2}));
+        assertEquals(8, solution.maxArea(new int[]{2, 2, 2, 2, 2}));
     }
 }
