@@ -1,6 +1,8 @@
 package main.java.day03_dynamic_programming.top150;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * LC 139 - Word Break
@@ -33,7 +35,27 @@ import java.util.List;
  */
 public class WordBreak {
     public boolean wordBreak(String s, List<String> wordDict) {
-        // TODO: Implement dp[i] = can s[0..i) be segmented
+        Boolean[] memo = new Boolean[s.length()];
+        Set<String> dict = new HashSet<>(wordDict);
+        return canBreak(s, dict, 0, memo);
+    }
+
+    boolean canBreak(String s, Set<String> dict, int start, Boolean[] memo) {
+        if( start == s.length()) {
+            return true;
+        }
+        if(memo[start] != null) return memo[start]; // we have seen this already and processed it, so return processed result
+
+        for (int j = start + 1; j <= s.length(); j++) {
+            String sub = s.substring(start, j);
+            if(dict.contains(sub) && canBreak(s, dict, j, memo)) {
+                memo[start] = true; // store this result for word beginning at start
+                return true;
+            }
+        }
+        memo[start] = false; // store this result for word beginning at start
         return false;
     }
+
+
 }

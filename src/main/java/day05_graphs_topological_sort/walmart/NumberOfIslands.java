@@ -1,5 +1,10 @@
 package main.java.day05_graphs_topological_sort.walmart;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 /**
  * LC 200 - Number of Islands
  * Difficulty: Medium | Source: WALMART
@@ -42,7 +47,53 @@ package main.java.day05_graphs_topological_sort.walmart;
 public class NumberOfIslands {
 
     public int numIslands(char[][] grid) {
-        // TODO: Implement your solution here
-        return 0;
+        int r = grid.length;
+        int c = grid[0].length;
+        int components = 0;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                if(grid[i][j] == '1') {
+                    components++;
+                    bfs(i, j , grid);
+                }
+            }
+        }
+        return components;
+    }
+
+    void bfs(int i, int j, char[][] grid) {
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{i, j});
+        grid[i][j] = '0';
+
+        while(!q.isEmpty()) {
+            int[] cur = q.poll();
+            List<int[]> neighbors = getNeighbors(cur, grid);
+            for(int[] loc : neighbors) {
+                if(grid[loc[0]][loc[1]] == '1') {
+                    q.add(loc);
+                    grid[loc[0]][loc[1]] = '0';
+                }
+            }
+        }
+    }
+
+    private List<int[]> getNeighbors(int[] cur, char[][] grid) {
+        List<int[]> res = new ArrayList<>();
+        int i = cur[0];
+        int j = cur[1];
+        int r = grid.length-1;
+        int c = grid[0].length-1;
+
+        if(i >=0 && i < r)
+            res.add(new int[] {i+1 , j});
+        if(j >=0 && j < c)
+            res.add(new int[] {i , j+1});
+        if(i > 0 && i <= r)
+            res.add(new int[] {i-1, j});
+        if(j > 0 && j <= c)
+            res.add(new int[] {i, j-1});
+
+        return res;
     }
 }
