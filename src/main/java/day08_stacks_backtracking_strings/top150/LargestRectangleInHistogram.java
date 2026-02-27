@@ -27,7 +27,7 @@ package main.java.day08_stacks_backtracking_strings.top150;
 public class LargestRectangleInHistogram {
 
     public int largestRectangleArea(int[] heights) {
-        // TODO: Implement your solution here
+
         return 0;
     }
 }

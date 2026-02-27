@@ -37,4 +37,9 @@ class WildcardMatchingTest {
     void emptyStringAndPattern() {
         assertTrue(solution.isMatch("", ""));
     }
+
+    @Test
+    void complexMatch2() {
+        assertTrue(solution.isMatch("adcebefdrs", "a*s"));
+    }
 }

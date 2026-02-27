@@ -29,7 +29,34 @@ package main.java.day10_hard_problems_mock.top150;
 public class WildcardMatching {
 
     public boolean isMatch(String s, String p) {
-        // TODO: Implement your solution here
-        return false;
+        if(s.equals(p)) return true;
+        if(p.equals("*")) return  true;
+        int si = 0, pi = 0;
+        int sn = s.length(), pn = p.length();
+        int star = -1;
+        int match = -1;
+
+        while(si< sn) {
+            if(pi < pn && (p.charAt(pi) == '?' || p.charAt(pi) == s.charAt(si))) {
+                pi++;
+                si++;
+            } else if(pi < pn && p.charAt(pi) == '*') {
+                star = pi;
+                match = si;
+                pi++;
+            } else if(star != -1){
+                pi = star + 1;
+                match++;
+                si = match;
+            } else {
+                return false;
+            }
+        }
+
+        while(pi < pn && p.charAt(pi) == '*') {
+            pi++;
+        }
+
+        return pi == pn;
     }
 }
